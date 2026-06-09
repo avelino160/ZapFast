@@ -49,13 +49,13 @@ function MetricCard({ title, value, icon: Icon, trendChange, trendType = 'neutra
   return (
     <div className="rounded-lg h-full">
       <Card className="h-full transition-colors duration-200">
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-4 lg:p-5">
+        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-1 px-3 pt-3 sm:px-4 sm:pt-4 lg:px-5 lg:pt-5">
           <CardTitle className="text-[10px] sm:text-xs lg:text-sm font-medium text-muted-foreground">
             {title}
           </CardTitle>
           <Icon className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-muted-foreground" aria-hidden="true" />
         </CardHeader>
-        <CardContent className="p-3 sm:p-4 lg:p-5 pt-0">
+        <CardContent className="px-3 pb-3 sm:px-4 sm:pb-4 lg:px-5 lg:pb-5 pt-1">
           <div className="text-lg sm:text-xl lg:text-2xl font-bold text-foreground" data-testid={testId}>
             {value}
           </div>
@@ -272,6 +272,15 @@ export default function Dashboard() {
   const rateDiff = getRateDiff();
   const messageDiff = getMessageDiff();
 
+  // Cores do gráfico baseadas no tema
+  const chartColors = {
+    text: theme === 'dark' ? '#ffffff' : '#000000',
+    grid: theme === 'dark' ? '#444444' : '#e5e5e5',
+    axis: theme === 'dark' ? '#666666' : '#999999',
+    tooltipBg: theme === 'dark' ? '#1a1a1a' : '#ffffff',
+    tooltipBorder: theme === 'dark' ? '#333333' : '#e5e5e5',
+  };
+
   return (
     <div className="flex h-screen bg-background">
       <Sidebar />
@@ -374,7 +383,7 @@ export default function Dashboard() {
                       Últimos 7 dias de automação
                     </CardDescription>
                   </div>
-                  <div className="flex items-center gap-4 text-[10px] sm:text-xs text-muted-foreground">
+                  <div className="flex items-center gap-4 text-[10px] sm:text-xs text-foreground">
                     {[
                       { color: "#8b5cf6", label: "Interações" },
                       { color: "#a78bfa", label: "Contatos" },
@@ -392,7 +401,7 @@ export default function Dashboard() {
               <CardContent className="p-2 sm:p-4 lg:p-6 pt-0 flex-1">
                 <div className="h-[250px] sm:h-[300px] lg:h-[340px] w-full" data-testid="chart-metrics">
                   <ResponsiveContainer width="100%" height="100%">
-                    <ComposedChart data={metricsData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <ComposedChart data={metricsData} margin={{ top: 10, right: 30, left: 10, bottom: 5 }}>
                       <defs>
                         <linearGradient id="gradMensagens" x1="0" y1="0" x2="0" y2="1">
                           <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.3} />
@@ -407,29 +416,33 @@ export default function Dashboard() {
                           <stop offset="95%" stopColor="#c084fc" stopOpacity={0.0} />
                         </linearGradient>
                       </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" opacity={0.6} />
+                      <CartesianGrid strokeDasharray="3 3" stroke={chartColors.grid} opacity={0.5} />
                       <XAxis
                         dataKey="name"
-                        tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 10 }}
-                        axisLine={false}
-                        tickLine={false}
+                        tick={{ fill: chartColors.text, fontSize: 12 }}
+                        axisLine={{ stroke: chartColors.axis }}
+                        tickLine={{ stroke: chartColors.axis }}
+                        stroke={chartColors.axis}
                       />
                       <YAxis
-                        tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 10 }}
-                        axisLine={false}
-                        tickLine={false}
+                        tick={{ fill: chartColors.text, fontSize: 12 }}
+                        axisLine={{ stroke: chartColors.axis }}
+                        tickLine={{ stroke: chartColors.axis }}
+                        stroke={chartColors.axis}
+                        domain={[0, 'auto']}
+                        allowDataOverflow={false}
                       />
                       <Tooltip
                         contentStyle={{
-                          backgroundColor: 'hsl(var(--popover))',
-                          border: '1px solid hsl(var(--border))',
+                          backgroundColor: chartColors.tooltipBg,
+                          border: `1px solid ${chartColors.tooltipBorder}`,
                           borderRadius: '8px',
                           fontSize: '11px',
-                          color: 'hsl(var(--foreground))',
+                          color: chartColors.text,
                           boxShadow: '0 10px 25px -5px rgba(0,0,0,0.2)',
                         }}
-                        labelStyle={{ color: 'hsl(var(--muted-foreground))', marginBottom: 4 }}
-                        cursor={{ stroke: 'hsl(var(--border))', strokeWidth: 1 }}
+                        labelStyle={{ color: chartColors.text, marginBottom: 4, fontWeight: 'bold' }}
+                        cursor={{ stroke: chartColors.axis, strokeWidth: 1 }}
                       />
                       <Area
                         type="monotone"
@@ -484,7 +497,7 @@ export default function Dashboard() {
                   ].map(({ color, label }) => (
                     <div key={label} className="flex items-center gap-1">
                       <div className="h-1.5 w-1.5 rounded-full shrink-0" style={{ backgroundColor: color }} />
-                      <span className="text-[8px] text-muted-foreground whitespace-nowrap">{label}</span>
+                      <span className="text-[8px] text-foreground whitespace-nowrap">{label}</span>
                     </div>
                   ))}
                 </div>

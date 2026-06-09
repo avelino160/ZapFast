@@ -4,6 +4,7 @@ import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { useSettings } from "@/contexts/SettingsContext";
 import { useState } from "react";
 import logoDashboard from "@assets/logo-dashboard-old.png";
+import pilotIcon from "@/assets/pilot-icon.png";
 import whatsappIcon from "@/assets/whatsapp-icon.png";
 import { IoLogoWhatsapp } from "react-icons/io";
 import {
@@ -20,6 +21,7 @@ import {
   Rocket,
   LogOut,
   Gift,
+  Zap,
 } from "lucide-react";
 
 export default function Sidebar() {
@@ -64,9 +66,14 @@ export default function Sidebar() {
           {!showMinimized && (
             <Link href="/dashboard" className="flex items-center gap-2.5">
               <img 
+                src={pilotIcon} 
+                alt="PilotZap Icon" 
+                className="h-10 w-10 object-contain"
+              />
+              <img 
                 src={logoDashboard} 
                 alt="PilotZap Logo" 
-                className="h-12 w-auto object-contain cursor-pointer"
+                className="h-12 w-auto object-contain cursor-pointer dark:brightness-0 dark:invert"
               />
             </Link>
           )}
@@ -109,6 +116,28 @@ export default function Sidebar() {
             );
           })}
         </nav>
+
+        {/* Botão de Suporte ao Cliente */}
+        <div className="px-4 pb-4 mt-auto">
+          <Button
+            onClick={() => {
+              const userName = localStorage.getItem("demo_user_name") || "Usuário";
+              const userEmail = localStorage.getItem("demo_user_email") || "email@exemplo.com";
+              const message = encodeURIComponent(
+                `Olá, Meu nome é ${userName} e meu e-mail de cadastro na PilotZap é ${userEmail}. Preciso de ajuda com [descreva brevemente o problema]. Poderiam me auxiliar, por favor? Obrigado!`
+              );
+              window.open(`https://wa.me/5511999999999?text=${message}`, '_blank');
+              setIsMobileMenuOpen(false);
+            }}
+            variant="outline"
+            className={`w-full ${showMinimized ? 'justify-center px-2' : 'justify-start'} bg-green-500 text-white border-green-600 hover:bg-green-500 hover:text-white hover:border-green-600`}
+            data-testid="button-customer-support"
+            title={showMinimized ? "Suporte ao Cliente" : undefined}
+          >
+            <IoLogoWhatsapp className={`h-5 w-5 ${showMinimized ? '' : 'mr-3'}`} />
+            {!showMinimized && "Suporte ao Cliente"}
+          </Button>
+        </div>
       </div>
     );
   };

@@ -157,13 +157,13 @@ export default function Analytics() {
                     <div className="text-2xl font-bold" data-testid="text-active-funnels">
                       {analytics?.activeFunnels || 0}
                     </div>
-                    <div className="flex items-center space-x-2 mt-1">
+                    <div className="flex flex-wrap items-center gap-1 mt-1">
                       <Badge variant="outline" className="text-primary border-primary text-xs">
                         {analytics?.totalFunnels || 0} total
                       </Badge>
-                      <p className="text-xs text-muted-foreground">
+                      <span className="text-xs text-muted-foreground">
                         {metrics.funnelSuccessRate.toFixed(0)}% ativos
-                      </p>
+                      </span>
                     </div>
                   </CardContent>
                 </Card>
@@ -177,13 +177,13 @@ export default function Analytics() {
                     <div className="text-2xl font-bold" data-testid="text-total-messages">
                       {analytics?.totalMessages || 0}
                     </div>
-                    <div className="flex items-center space-x-2 mt-1">
+                    <div className="flex flex-wrap items-center gap-1 mt-1">
                       <Badge variant="outline" className="text-primary border-primary text-xs">
                         {analytics?.todayMessages || 0} hoje
                       </Badge>
-                      <p className="text-xs text-muted-foreground">
+                      <span className="text-xs text-muted-foreground">
                         {metrics.avgMessagesPerFunnel.toFixed(1)} por fluxo
-                      </p>
+                      </span>
                     </div>
                   </CardContent>
                 </Card>
@@ -197,13 +197,13 @@ export default function Analytics() {
                     <div className="text-2xl font-bold" data-testid="text-total-contacts">
                       {analytics?.totalContacts || 0}
                     </div>
-                    <div className="flex items-center space-x-2 mt-1">
+                    <div className="flex flex-wrap items-center gap-1 mt-1">
                       <Badge variant="secondary" className="text-xs">
                         {analytics?.activeContacts || 0} ativos
                       </Badge>
-                      <p className="text-xs text-muted-foreground">
+                      <span className="text-xs text-muted-foreground">
                         {metrics.contactEngagementRate.toFixed(1)}% engajamento
-                      </p>
+                      </span>
                     </div>
                   </CardContent>
                 </Card>
@@ -217,16 +217,16 @@ export default function Analytics() {
                     <div className="text-2xl font-bold" data-testid="text-delivery-rate">
                       {analytics?.deliveryRate ? `${analytics.deliveryRate.toFixed(1)}%` : '0.0%'}
                     </div>
-                    <div className="flex items-center space-x-2 mt-1">
+                    <div className="flex flex-wrap items-center gap-1 mt-1">
                       <Badge 
                         variant={(analytics?.deliveryRate || 0) >= 90 ? "default" : "secondary"}
                         className="text-xs"
                       >
                         {analytics?.deliveredMessages || 0} entregues
                       </Badge>
-                      <p className="text-xs text-muted-foreground">
+                      <span className="text-xs text-muted-foreground">
                         de {analytics?.sentMessages || 0} enviadas
-                      </p>
+                      </span>
                     </div>
                   </CardContent>
                 </Card>

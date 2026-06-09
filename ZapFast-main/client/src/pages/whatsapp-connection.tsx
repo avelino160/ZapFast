@@ -39,10 +39,10 @@ export default function WhatsAppConnection() {
             <div className="space-y-4">
               {connections && connections.length > 0 ? (
                 connections.map((conn: any) => (
-                  <Card key={conn.id} className="bg-[#1a1b23] border border-border/50 shadow-xl rounded-2xl overflow-hidden">
+                  <Card key={conn.id} className="bg-card border border-border/50 shadow-xl rounded-2xl overflow-hidden">
                     <CardContent className="pt-8 pb-8 px-8 space-y-6">
                       <div className="flex items-center gap-3">
-                        <span className="text-white text-sm font-medium">Status:</span>
+                        <span className="text-foreground text-sm font-medium">Status:</span>
                         <Badge className={`${conn.isConnected ? "bg-green-500/20 text-green-500" : "bg-red-500/20 text-red-500"} border-none px-3 py-1 rounded-md font-bold text-[10px]`}>
                           {conn.isConnected ? "Conectado" : "Desconectado"}
                         </Badge>
@@ -50,10 +50,10 @@ export default function WhatsAppConnection() {
                       
                       <div className="space-y-6">
                         <div>
-                          <h3 className="text-white text-xl font-bold">
+                          <h3 className="text-foreground text-xl font-bold">
                             {conn.name || (conn.isConnected ? "Número conectado" : "Número desconectado")}
                           </h3>
-                          {conn.phoneNumber && <p className="text-gray-400 text-sm mt-1">{conn.phoneNumber}</p>}
+                          {conn.phoneNumber && <p className="text-muted-foreground text-sm mt-1">{conn.phoneNumber}</p>}
                         </div>
                         <Button 
                           className={`w-full ${conn.isConnected ? "bg-red-500 hover:bg-red-600" : "bg-primary hover:bg-primary/90"} text-white font-bold h-12 text-base rounded-xl transition-all active:scale-95`}
@@ -75,17 +75,17 @@ export default function WhatsAppConnection() {
                   </Card>
                 ))
               ) : (
-                <Card className="bg-[#1a1b23] border border-border/50 shadow-xl rounded-2xl overflow-hidden">
+                <Card className="bg-card border border-border/50 shadow-xl rounded-2xl overflow-hidden">
                   <CardContent className="pt-8 pb-8 px-8 space-y-6">
                     <div className="flex items-center gap-3">
-                      <span className="text-white text-sm font-medium">Status:</span>
+                      <span className="text-foreground text-sm font-medium">Status:</span>
                       <Badge className="bg-red-500/20 text-red-500 border-none px-3 py-1 rounded-md font-bold text-[10px]">
                         Desconectado
                       </Badge>
                     </div>
                     
                     <div className="space-y-6">
-                      <h3 className="text-white text-xl font-bold">Conecte um número</h3>
+                      <h3 className="text-foreground text-xl font-bold">Conecte um número</h3>
                       <Button 
                         className="w-full bg-primary hover:bg-primary/90 text-white font-bold h-12 text-base rounded-xl transition-all active:scale-95"
                         onClick={() => setShowConnectionModal(true)}
@@ -100,7 +100,7 @@ export default function WhatsAppConnection() {
 
             {/* Purchase Options */}
             <div className="space-y-4 h-full">
-              <h2 className="text-xl font-bold text-white mb-2">Mais números:</h2>
+              <h2 className="text-xl font-bold text-foreground mb-2">Mais números:</h2>
               
               <div className="space-y-3">
                 {/* Option 1 */}
