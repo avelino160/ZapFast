@@ -1,0 +1,122 @@
+═══════════════════════════════════════════════════════════
+  🔐 CREDENCIAIS DE TESTE - ZAPFAST
+═══════════════════════════════════════════════════════════
+
+📧 EMAIL:    admin@zapfast.com
+🔑 SENHA:    admin123
+
+⚠️  IMPORTANTE: Altere essa senha após o primeiro login!
+
+═══════════════════════════════════════════════════════════
+  🚀 COMANDOS RÁPIDOS
+═══════════════════════════════════════════════════════════
+
+# Setup inicial (executar apenas uma vez)
+npx tsx setup-auth.ts
+
+# Iniciar servidor
+npm run dev
+
+# Servidor estará rodando em:
+http://localhost:5000
+
+═══════════════════════════════════════════════════════════
+  🔗 ENDPOINTS DE AUTENTICAÇÃO
+═══════════════════════════════════════════════════════════
+
+LOGIN:
+POST http://localhost:5000/api/auth/login
+Body: { "email": "admin@zapfast.com", "password": "admin123" }
+
+VERIFICAR SESSÃO:
+GET http://localhost:5000/api/auth/me
+
+LOGOUT:
+POST http://localhost:5000/api/auth/logout
+
+REGISTRO (criar novo usuário):
+POST http://localhost:5000/api/auth/register
+Body: {
+  "email": "novo@email.com",
+  "password": "minhasenha123",
+  "firstName": "Nome",
+  "lastName": "Sobrenome"
+}
+
+═══════════════════════════════════════════════════════════
+  🛡️ ROTAS PROTEGIDAS (necessitam login)
+═══════════════════════════════════════════════════════════
+
+WhatsApp:
+  GET    /api/whatsapp/status
+  POST   /api/whatsapp/qr
+  POST   /api/whatsapp/disconnect
+  DELETE /api/whatsapp/connections/:id
+
+Funis:
+  GET    /api/funnels
+  POST   /api/funnels
+  POST   /api/funnels/import
+  PUT    /api/funnels/:id
+  DELETE /api/funnels/:id
+
+Contatos:
+  GET    /api/contacts
+  POST   /api/contacts
+  POST   /api/contacts/import
+  PUT    /api/contacts/:id
+  DELETE /api/contacts/:id
+
+Mensagens:
+  GET    /api/messages
+  POST   /api/messages/send
+
+Usuário:
+  GET    /api/user/usage
+  GET    /api/user/plan-status
+
+═══════════════════════════════════════════════════════════
+  📝 VARIÁVEIS DE AMBIENTE (.env)
+═══════════════════════════════════════════════════════════
+
+DATABASE_URL=postgresql://...
+SESSION_SECRET=pilotzap-secret-key-2026-production-change-this
+NODE_ENV=development
+
+═══════════════════════════════════════════════════════════
+  📚 DOCUMENTAÇÃO
+═══════════════════════════════════════════════════════════
+
+RESUMO DAS CORREÇÕES:    RESUMO-CORRECOES.md
+DETALHES TÉCNICOS:       CORRECOES-LOGIN.md
+GUIA DE TESTES:          TESTE-LOGIN.md
+
+═══════════════════════════════════════════════════════════
+  🎯 PRÓXIMOS PASSOS
+═══════════════════════════════════════════════════════════
+
+1. Execute o setup: npx tsx setup-auth.ts
+2. Inicie o servidor: npm run dev
+3. Teste o login com as credenciais acima
+4. Altere a senha padrão
+5. Configure SESSION_SECRET para produção
+6. Implemente store de sessão persistente (Redis/PostgreSQL)
+
+═══════════════════════════════════════════════════════════
+  ✅ STATUS DAS CORREÇÕES
+═══════════════════════════════════════════════════════════
+
+[✓] Middleware de autenticação aplicado
+[✓] Coluna password verificada no banco
+[✓] Sistema de sessões configurado
+[✓] Rota /api/auth/me aprimorada
+[✓] 17 rotas protegidas corrigidas
+[✓] Script de setup automático criado
+[✓] Documentação completa gerada
+[✓] Testes validados
+
+═══════════════════════════════════════════════════════════
+
+Data: 08/06/2026
+Versão: 1.0.0
+Status: ✅ CONCLUÍDO

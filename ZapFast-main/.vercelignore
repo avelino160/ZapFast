@@ -1,0 +1,62 @@
+# Development files
+*.log
+.DS_Store
+Thumbs.db
+
+# Dependencies (will be installed by Vercel)
+node_modules
+
+# Environment files (configure in Vercel dashboard)
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Build outputs (will be generated)
+dist
+build
+.next
+
+# Testing
+coverage
+*.lcov
+
+# Database files (use remote DB)
+*.db
+*.sqlite
+*.sqlite3
+
+# WhatsApp session data (won't work on serverless)
+auth_info
+backend/auth_info
+
+# Local development
+.vscode/settings.json
+.idea
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Temporary files
+tmp
+temp
+.cache
+
+# Documentation (not needed for deployment)
+README-VERCEL.md
+frontend/docs
+backend/docs
+
+# Scripts (not needed in production)
+backend/scripts
+backend/tools
+
+# Archive files
+backend/attached_assets/archive
